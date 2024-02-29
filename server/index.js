@@ -94,8 +94,9 @@ async function listEvents(calendarId, authClient, timeMin, timeMax) {
 // Schedule tasks based on user availability
 app.post('/schedule-tasks', async (req, res) => {
     const { date, startTime, endTime } = req.body;
-    const startOfDay = new Date(startTime);
-    const endOfDay = new Date(endTime);
+    const startOfDay = new Date(`${date}T${startTime.split('T')[1]}`);
+    const endOfDay = new Date(`${date}T${endTime.split('T')[1]}`);
+
 
     let existingEvents;
     try {
